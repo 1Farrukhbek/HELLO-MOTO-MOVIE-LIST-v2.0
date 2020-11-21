@@ -10,7 +10,7 @@ var normalizedMovieList = movies.map(function (movie, i) {
         imdbRating: movie.imdb_rating,
         runtime: movie.runtime,
         language: movie.language,
-        youtubeImg: `http://i3.ytimg.com/vi/${movie.ytid}/sddefault.jpg`,
+        youtubeImg: `http://i3.ytimg.com/vi/${movie.ytid}/mqdefault.jpg`,
         youtubeId: `https://youtube.com/watch?v=${movie.ytid}`
     }
 });
