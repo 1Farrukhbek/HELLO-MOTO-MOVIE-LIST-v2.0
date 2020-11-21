@@ -6,11 +6,11 @@ body {
   font-size: 70px;
 }
 
-.pokemons__container {
+.movie__container {
   max-width: 1300px;
 }
 
-.pokemon__list {
+.movie__list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
