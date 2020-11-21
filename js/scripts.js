@@ -15,7 +15,7 @@ var normalizedMovieList = movies.map(function (movie, i) {
     }
 });
 
-var miniTest = normalizedMovieList.slice(0, 100);
+// var miniTest = normalizedMovieList.slice(0, 100);
 
 // SELECT ITEMS FROM HTML 
 var elMovieList = $_('.js-movie-list');
@@ -58,5 +58,5 @@ var renderMovieElements = function (movies) {
     elMovieList.appendChild(elMoviesWrapperFragment);
 };
 
-renderMovieElements(miniTest)
+renderMovieElements(normalizedMovieList)
 
