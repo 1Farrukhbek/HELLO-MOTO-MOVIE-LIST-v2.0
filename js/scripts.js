@@ -4,7 +4,7 @@ var normalizedMovieList = movies.map(function (movie, i) {
         id: i + 1,
         title: movie.Title.toString(),
         year: movie.movie_year,
-        categories: movie.Categories.split('|'),
+        categories: movie.Categories.split('|').join(', '),
         summary: movie.summary,
         imdbId: movie.imdb_id,
         imdbRating: movie.imdb_rating,
@@ -27,6 +27,9 @@ var createMovieElement = function (movie) {
     
     $_('.js-movie-img', templateMovieElement).src = movie.youtubeImg;
     $_('.js-movie-front-title', templateMovieElement).textContent = movie.title;
+    $_('.js-movie-category', templateMovieElement).textContent = movie.categories;
+    $_('.js-imdb-rating', templateMovieElement).textContent = movie.imdbRating;
+    $_('.js-runtime', templateMovieElement).textContent = `${movie.runtime} min`;
     $_('.js-movie-back-title', templateMovieElement).textContent = movie.title;
     $_('.js-movie-summary', templateMovieElement).textContent = movie.summary;
     $_('.js-youtube-link', templateMovieElement).href = movie.youtubeId;
@@ -58,5 +61,5 @@ var renderMovieElements = function (movies) {
     elMovieList.appendChild(elMoviesWrapperFragment);
 };
 
-renderMovieElements(normalizedMovieList)
+renderMovieElements(normalizedMovieList.slice(20, 150))
 
