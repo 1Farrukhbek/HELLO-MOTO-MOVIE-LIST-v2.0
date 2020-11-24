@@ -14,22 +14,24 @@
   <h1 class="site-heading text-center my-2 h2">HELLO MOTO MOVIE LIST</h1>
   <div class="container movie__container">
     <h2 class="sr-only">Movie list</h2>
+
     <form class="js-search-form" action="https://echo.htmlacademy.ru/" method="GET">
-      <p class="d-md-flex text-center">
-        <input class="form-control m-2 js-search-input" type="search" name="searchname" placeholder="Search" aria-label="Search">
-        <button class="btn btn-success m-2" type="submit">Search</button>
-        <button class="btn btn-primary m-2" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">FILTER</button>
+      <p class="d-md-flex align-items-center text-center">
+        <input class="form-control js-search-input" type="search" name="searchname" placeholder="Search" aria-label="Search">
+        <button class="btn btn-success" type="submit">Search</button>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">FILTER</button>
       </p>
       <div class="collapse" id="collapseExample">
         <div class="card card-body w-auto">
           <select class="form-control mb-2 js-category" name="category">
-            <option value="all" selected>All</option>
+            <option value="All" selected>All</option>
           </select>
 
           <input class="form-control js-imdb-rating" type="number" name="rating" step="0.1" min="0" max="10" maxlength="3">
         </div>
       </div>
     </form>
+
     <ul class="movie__list js-movie-list"></ul>
   </div>
   

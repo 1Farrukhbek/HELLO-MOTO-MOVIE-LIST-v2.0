@@ -52,8 +52,11 @@ var renderMovieElements = function (movies) {
   elMovieList.appendChild(elMoviesWrapperFragment);
 };
 
+// TEMPORARY RENDER MOVIES
 renderMovieElements(normalizedMovieList.slice(20, 100));
 
+
+// CREATE CATEGURY LIST FROM GIVEN MOVIES 
 var categoryList = [];
 
 normalizedMovieList.forEach(function (movie) {
@@ -67,12 +70,12 @@ normalizedMovieList.forEach(function (movie) {
 categoryList.sort();
 
 
+
 categoryList.forEach(function (category) {
   var createCategoryOption = createElement('option', '', category);
+  createCategoryOption.value = category;
   elCategory.appendChild(createCategoryOption);
 });
-
-
 
 var searchMovie = function (evt) {
   evt.preventDefault();
