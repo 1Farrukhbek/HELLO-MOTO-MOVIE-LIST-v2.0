@@ -56,7 +56,7 @@ var renderMovieElements = function (movies) {
 renderMovieElements(normalizedMovieList.slice(20, 100));
 
 
-// CREATE CATEGURY LIST FROM GIVEN MOVIES 
+// CREATE CATEGORY LIST FROM GIVEN MOVIES 
 var categoryList = [];
 
 normalizedMovieList.forEach(function (movie) {
@@ -69,27 +69,38 @@ normalizedMovieList.forEach(function (movie) {
 
 categoryList.sort();
 
-
+var elOptionsFragment = document.createDocumentFragment();
 
 categoryList.forEach(function (category) {
   var createCategoryOption = createElement('option', '', category);
   createCategoryOption.value = category;
-  elCategory.appendChild(createCategoryOption);
+  elOptionsFragment.appendChild(createCategoryOption);
 });
+
+elCategory.appendChild(elOptionsFragment);
+
+
+var findMovies = function (title, minRating, genre) {
+  return normalizedMovieList.filter((movie) => {
+    var doesMatchCategory = genre === 'All' || movie.categories.includes(genre);
+
+    return movie.title.match(title) && movie.imdbRating >= minRating && doesMatchCategory;
+  });
+};
 
 var searchMovie = function (evt) {
   evt.preventDefault();
   
   var searchType = new RegExp(elSearchInput.value.trim(), 'gi');
-  var searchResult = normalizedMovieList.filter(function (movie) {
-    return movie.title.match(searchType);
-  });
+  var minimumRating = Number(elImdbRating.value);
+  var genre = elCategory.value;
 
-  renderMovieElements(searchResult);
-  elSearchInput.value = '';
+  var searchResults = findMovies(searchType, minimumRating, genre);
+
+  renderMovieElements(searchResults);
 }
 
-
 elSearchForm.addEventListener('submit', searchMovie);
+elSearchForm.addEventListener('change', searchMovie);
 
 
