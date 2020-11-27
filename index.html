@@ -17,7 +17,7 @@
     
     <form class="js-search-form" action="https://echo.htmlacademy.ru/" method="GET">
       <p class="d-md-flex align-items-center text-center">
-        <input class="form-control js-search-input" type="search" name="searchname" placeholder="Search" aria-label="Search">
+        <input class="form-control js-search-input" type="search" name="searchname" placeholder="Search" aria-label="Search" minlength="2">
         <button class="btn btn-success" type="submit">Search</button>
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">FILTER</button>
         <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Bookmark</button>
@@ -43,7 +43,7 @@
 
 
   <div class="modal fade js-movie-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
           <h2 class="modal-title h4 js-modal-heading" id="exampleModalLabel"></h2>
@@ -72,9 +72,9 @@
       <div class="back p-2 rounded">
         <h3 class="h5 js-movie-back-title"></h3>
         <div class="d-flex justify-content-around">
-          <a class="d-block js-youtube-link btn btn-outline-danger" href="">Watch Trailer</a>
+          <a class="d-block js-youtube-link btn btn-sm btn-outline-danger" href="">Watch Trailer</a>
           <button class="d-block btn btn-outline-success btn-sm js-movie-bookmark" type="button">Bookmark</button>
-          <button type="button" class="d-block js-modal-link btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">More info</button>
+          <button type="button" class="d-block js-modal-link btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#exampleModal">More info</button>
         </div>
         <span class="js-movie-summary"></span>
       </div>

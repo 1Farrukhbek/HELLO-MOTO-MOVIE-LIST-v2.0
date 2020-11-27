@@ -163,10 +163,8 @@ elMovieList.addEventListener('click', (evt) => {
 
 elBookmarkedMovies.addEventListener('click', function (evt) {
   if (evt.target.matches('.js-remove-bookmarked-movie-button')) {
-    var btnImdbId = evt.target.dataset.imdbId ;
-    var findBookmarkMovie = bookmarkedMovies.find((movie)=>{
-      return movie.imdbId === btnImdbId;
-    });
+    var btnMovieImdbId = evt.target.dataset.imdbId ;
+    var findBookmarkMovie = bookmarkedMovies.find((movie)=> movie.imdbId === btnMovieImdbId);
     var indexBookmark = bookmarkedMovies.indexOf(findBookmarkMovie);
     
     bookmarkedMovies.splice(indexBookmark , 1);
