@@ -24,9 +24,12 @@ var elSearchInput = $_('.js-search-input', elSearchForm);
 var elBookmarkedMovies = $_('.bookmarked-movies');
 var elCategory = $_('.js-category', elSearchForm);
 var elImdbRating = $_('.js-imdb-rating', elSearchForm);
+
+//Templates
 var elMovieCardTemplate = $_('#movie-template').content;
 var elBookmarkedMovieTemplate = $_('#bookmarked-movie-template').content;
 
+// Modals
 var elMovieModal = $_('.js-movie-modal');
 var elModalHeading = $_('.js-modal-heading', elMovieModal);
 var elModalInfo = $_('.js-modal-info', elMovieModal);
