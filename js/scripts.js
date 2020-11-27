@@ -1,3 +1,5 @@
+var bookmarkedMovies = [];
+
 // CREATE NORMALIZED MOVIE ARRAY
 var normalizedMovieList = movies.map(function (movie, i) {
   return {
@@ -19,19 +21,26 @@ var normalizedMovieList = movies.map(function (movie, i) {
 var elMovieList = $_('.js-movie-list');
 var elSearchForm = $_('.js-search-form');
 var elSearchInput = $_('.js-search-input', elSearchForm);
+var elBookmarkedMovies = $_('.bookmarked-movies');
 var elCategory = $_('.js-category', elSearchForm);
 var elImdbRating = $_('.js-imdb-rating', elSearchForm);
 var elMovieCardTemplate = $_('#movie-template').content;
+var elBookmarkedMovieTemplate = $_('#bookmarked-movie-template').content;
+
+var elMovieModal = $_('.js-movie-modal');
+var elModalHeading = $_('.js-modal-heading', elMovieModal);
+var elModalInfo = $_('.js-modal-info', elMovieModal);
 
 // CREATE MOVIE ELEMENTS FROM TEMPLATE
 var createMovieElement = function (movie) {
   var templateMovieElement = elMovieCardTemplate.cloneNode(true);
   
+  $_('.search-results__item', templateMovieElement).dataset.imdbId = movie.imdbId;
   $_('.js-movie-img', templateMovieElement).src = movie.youtubeImg;
   $_('.js-movie-front-title', templateMovieElement).textContent = movie.title;
   $_('.js-movie-category', templateMovieElement).textContent = movie.categories.join(', ');
   $_('.js-imdb-rating', templateMovieElement).textContent = movie.imdbRating;
-  $_('.js-runtime', templateMovieElement).textContent = `${movie.runtime} min`;
+  $_('.js-year', templateMovieElement).textContent = movie.year;
   $_('.js-movie-back-title', templateMovieElement).textContent = movie.title;
   $_('.js-movie-summary', templateMovieElement).textContent = movie.summary;
   $_('.js-youtube-link', templateMovieElement).href = movie.youtubeId;
@@ -103,4 +112,62 @@ var searchMovie = function (evt) {
 elSearchForm.addEventListener('submit', searchMovie);
 elSearchForm.addEventListener('change', searchMovie);
 
+
+var renderBookmarkedMovies = function () {
+  elBookmarkedMovies.innerHTML = '';
+
+  var elBookmarkedMoviesFragment = document.createDocumentFragment();
+
+  bookmarkedMovies.forEach(function (movie) {
+    var elBookmarkedMovie = elBookmarkedMovieTemplate.cloneNode(true);
+
+    $_('.bookmarked-movie__title', elBookmarkedMovie).textContent = movie.title;
+    $_('.js-remove-bookmarked-movie-button', elBookmarkedMovie).dataset.imdbId = movie.imdbId;
+
+    elBookmarkedMoviesFragment.appendChild(elBookmarkedMovie);
+  });
+
+  elBookmarkedMovies.appendChild(elBookmarkedMoviesFragment);
+};
+
+var bookmarkMovie = function (movie) {
+  if (bookmarkedMovies.includes(movie)) {
+    return;
+  }
+
+  bookmarkedMovies.push(movie);
+
+  renderBookmarkedMovies();
+};
+
+
+elMovieList.addEventListener('click', (evt) => {
+  if (evt.target.matches('.js-modal-link')) {
+    var movieImdbId = evt.target.closest('.search-results__item').dataset.imdbId;
+
+    var foundMovie = normalizedMovieList.find(function (movie) {
+      return movie.imdbId === movieImdbId;
+    })
+
+    elModalHeading.textContent = foundMovie.title;
+    elModalInfo.textContent = foundMovie.summary
+  } else if (evt.target.matches('.js-movie-bookmark')) {
+    var movieImdbId = evt.target.closest('.search-results__item').dataset.imdbId;
+    let foundMovie = normalizedMovieList.find(movie => movie.imdbId === movieImdbId);
+    bookmarkMovie(foundMovie);
+  }
+});
+
+elBookmarkedMovies.addEventListener('click', function (evt) {
+  if (evt.target.matches('.js-remove-bookmarked-movie-button')) {
+    var btnImdbId = evt.target.dataset.imdbId ;
+    var findBookmarkMovie = bookmarkedMovies.find((movie)=>{
+      return movie.imdbId === btnImdbId;
+    });
+    var indexBookmark = bookmarkedMovies.indexOf(findBookmarkMovie);
+    
+    bookmarkedMovies.splice(indexBookmark , 1);
+    renderBookmarkedMovies();
+  };
+});
 

@@ -14,41 +14,77 @@
   <h1 class="site-heading text-center my-2 h2">HELLO MOTO MOVIE LIST</h1>
   <div class="container movie__container">
     <h2 class="sr-only">Movie list</h2>
-
+    
     <form class="js-search-form" action="https://echo.htmlacademy.ru/" method="GET">
       <p class="d-md-flex align-items-center text-center">
         <input class="form-control js-search-input" type="search" name="searchname" placeholder="Search" aria-label="Search">
         <button class="btn btn-success" type="submit">Search</button>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">FILTER</button>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">FILTER</button>
+        <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Bookmark</button>
       </p>
-      <div class="collapse" id="collapseExample">
+      <div class="collapse" id="collapse1">
         <div class="card card-body w-auto">
           <select class="form-control mb-2 js-category" name="category">
             <option value="All" selected>All</option>
           </select>
-
-          <input class="form-control js-imdb-rating" type="number" name="rating" step="0.1" min="0" max="10" maxlength="3">
+          
+          <input class="form-control js-imdb-rating" type="number" value="5" placeholder="5" name="rating" step="0.1" min="0" max="10">
+        </div>
+      </div>
+      <div class="collapse" id="collapse2">
+        <div class="card card-body">
+          <ul class="d-flex col flex-wrap bookmarked-movies"></ul>
         </div>
       </div>
     </form>
-
+    
     <ul class="movie__list js-movie-list"></ul>
+  </div>
+
+
+  <div class="modal fade js-movie-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h4 js-modal-heading" id="exampleModalLabel"></h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body js-modal-info"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Pin movie</button>
+        </div>
+      </div>
+    </div>
   </div>
   
   <template id="movie-template">
-    <li class="movie-card middle m-2 text-center">
+    <li class="search-results__item movie-card middle m-2 text-center">
       <div class="front rounded">
         <img class="js-movie-img" src="" alt="" width="400" height="225">
         <h3 class=" h5 js-movie-front-title badge-primary"></h3>
         <div class="js-movie-category"></div>
         <div class="js-imdb-rating"></div>
-        <div class="js-runtime"></div>
+        <div class="js-year"></div>
       </div>
       <div class="back p-2 rounded">
         <h3 class="h5 js-movie-back-title"></h3>
-        <a class="d-block js-youtube-link" href="">Watch Trailer</a>
+        <div class="d-flex justify-content-around">
+          <a class="d-block js-youtube-link btn btn-outline-danger" href="">Watch Trailer</a>
+          <button class="d-block btn btn-outline-success btn-sm js-movie-bookmark" type="button">Bookmark</button>
+          <button type="button" class="d-block js-modal-link btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">More info</button>
+        </div>
         <span class="js-movie-summary"></span>
       </div>
+    </li>
+  </template>
+
+  <template id="bookmarked-movie-template">
+    <li class="bookmarked-movie list-group-item border col-md-3">
+      <h3 class="bookmarked-movie__title h5">Salom</h3>
+      <button class="btn btn-sm btn-danger js-remove-bookmarked-movie-button">Remove</button>
     </li>
   </template>
   
